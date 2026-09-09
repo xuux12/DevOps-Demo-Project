@@ -1,0 +1,26 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.xuux12 }}
+          password: ${{ secrets.Ddckr_pat_o8MDyUWhaA5-aDb9n1aXZOyi0hg }}
+
+      - name: Build Docker image
+        run: docker build -t xuux12/ptx:latest .
+
+      - name: Push Docker image
+        run: docker push xuux12/ptx:latest
